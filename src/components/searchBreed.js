@@ -57,9 +57,7 @@ export default function SearchBreed() {
       {!loading && !error && (
         <div className="card-list">
           {breeds &&
-            breeds
-              .filter((breed) => breed.reference_image_id)
-              .map((breed) => <BreedCard breed={breed} key={breed.id} />)}
+            breeds.map((breed) => <BreedCard breed={breed} key={breed.id} />)}
         </div>
       )}
     </div>
