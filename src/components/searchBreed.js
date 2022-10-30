@@ -26,7 +26,6 @@ export default function SearchBreed() {
       const res = await fetch(url, options);
       const data = await res.json();
       setBreeds(data);
-      console.log(data);
     } catch (err) {
       setError("Failed to fetch breeds");
       setBreeds([]);

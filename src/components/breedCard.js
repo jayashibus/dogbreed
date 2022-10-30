@@ -1,23 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
+import loader from "./../loading.gif";
+import noImage from "./../no-image.png";
 
-export default function breedCard({ breed, history }) {
-  console.log("Shibu", breed.name);
-
+export default function BreedCard({ breed, history }) {
   const title = breed.name;
-  //   breed.name.substring(0, 30) + (breed.name.length > 30 ? "..." : "");
-  // const description =
-  //   breed.temperament.substring(0, 100) +
-  //   (breed.temperament.length > 100 ? "..." : "");
+  const [imgSrc, setSrc] = useState(loader);
 
   const showBreedDetails = () => {
     console.log("show breed details");
   };
+
+  const onLoadImage = async (event) => {
+    event.preventDefault();
+
+    const options = {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "x-api-key":
+          "live_5v3MiqnkHRhfk5VDdCO7cIq8wy818eEYchniKplOXWeNoFc62s3z3dBLCcGvJNJB",
+      },
+    };
+
+    const id = event.target.getAttribute("data-id");
+    console.log(id);
+    if (id) {
+      const url = `https://api.thedogapi.com/v1/images/${id}`;
+      try {
+        const res = await fetch(url, options);
+        const data = await res.json();
+        setSrc(data.url);
+      } catch (err) {
+        // setError("Failed to fetch breeds");
+        // setBreeds([]);
+      } finally {
+        // setLoading(false);
+      }
+    } else {
+      setSrc(noImage);
+    }
+  };
+
   return (
     <div className="card" onClick={showBreedDetails}>
       <img
         className="card--image"
-        src="https://cdn2.thedogapi.com/images/Sk7Qbg9E7_1280.jpg"
+        src={imgSrc}
         alt={breed.name}
+        data-id={breed.reference_image_id}
+        onLoad={onLoadImage}
       />
       <div className="card--content">
         <h3 className="card--title">{title}</h3>
