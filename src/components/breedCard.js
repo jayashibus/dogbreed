@@ -6,10 +6,6 @@ export default function BreedCard({ breed, history }) {
   const title = breed.name;
   const [imgSrc, setSrc] = useState(loader);
 
-  const showBreedDetails = () => {
-    console.log("show breed details");
-  };
-
   const onLoadImage = async (event) => {
     event.preventDefault();
 
@@ -24,7 +20,6 @@ export default function BreedCard({ breed, history }) {
     };
 
     const id = event.target.getAttribute("data-id");
-    console.log(id);
     if (id) {
       const url = `https://api.thedogapi.com/v1/images/${id}`;
       try {
@@ -32,10 +27,7 @@ export default function BreedCard({ breed, history }) {
         const data = await res.json();
         setSrc(data.url);
       } catch (err) {
-        // setError("Failed to fetch breeds");
-        // setBreeds([]);
-      } finally {
-        // setLoading(false);
+        setSrc(noImage);
       }
     } else {
       setSrc(noImage);
@@ -43,7 +35,7 @@ export default function BreedCard({ breed, history }) {
   };
 
   return (
-    <div className="card" onClick={showBreedDetails}>
+    <div className="card">
       <img
         className="card--image"
         src={imgSrc}
@@ -53,9 +45,8 @@ export default function BreedCard({ breed, history }) {
       />
       <div className="card--content">
         <h3 className="card--title">{title}</h3>
-        <small>Life Span: {breed.life_span}</small> |
-        <small>Origin: {breed.origin}</small> |
-        <small>Weight: {breed.weight.imperial}</small>
+        <small>Life Span: {breed.life_span}</small> <br></br>
+        <small>Height: {breed.height.imperial}</small>
         <p className="card--desc">{breed.temperament}</p>
       </div>
     </div>
