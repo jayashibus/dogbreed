@@ -100,14 +100,16 @@ export default function SearchBreed() {
           <option value="desc">DESC</option>
         </select>
       </form>
-
       {loading && <p className="flash info">Loading...</p>}
       {error && <p className="flash error">{error}</p>}
 
       {!loading && !error && (
         <div className="card-list">
-          {breeds &&
-            breeds.map((breed) => <BreedCard breed={breed} key={breed.id} />)}
+          {breeds && breeds.length > 0 ? (
+            breeds.map((breed) => <BreedCard breed={breed} key={breed.id} />)
+          ) : (
+            <p>No records found</p>
+          )}
         </div>
       )}
     </div>
