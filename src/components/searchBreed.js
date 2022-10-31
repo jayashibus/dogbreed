@@ -77,29 +77,35 @@ export default function SearchBreed() {
 
   return (
     <div>
-      <form className="form">
-        <label htmlFor="query" className="label">
-          Dog breed name
-        </label>
-        <input
-          type="text"
-          name="query"
-          className="input"
-          onKeyUp={debounce(onKeyChange)}
-          placeholder="i.e. Airedale Terrier"
-        />
-
-        <select onChange={onChangeValue}>
-          <option value="name">Name</option>
-          <option value="height">Height</option>
-          <option value="life_span">Lifespan</option>
-        </select>
-
-        <select onChange={onChangeSort}>
-          <option value="asc">ASC</option>
-          <option value="desc">DESC</option>
-        </select>
-      </form>
+      <div>
+        <form className="form">
+          <div>
+            <label htmlFor="query" className="label">
+              Dog breed name
+            </label>
+            <input
+              type="text"
+              name="query"
+              className="input"
+              onKeyUp={debounce(onKeyChange)}
+              placeholder="i.e. Airedale Terrier"
+            />
+          </div>
+          <div>
+            <select onChange={onChangeValue}>
+              <option value="name">Name</option>
+              <option value="height">Height</option>
+              <option value="life_span">Lifespan</option>
+            </select>
+          </div>
+          <div>
+            <select onChange={onChangeSort}>
+              <option value="asc">ASC</option>
+              <option value="desc">DESC</option>
+            </select>
+          </div>
+        </form>
+      </div>
       {loading && <p className="flash info">Loading...</p>}
       {error && <p className="flash error">{error}</p>}
 
