@@ -26,6 +26,7 @@ export default function SearchBreed() {
 
       const url = `https://api.thedogapi.com/v1/breeds/search?q=${query}`;
       try {
+        setError(null);
         const res = await fetch(url, options);
         const data = await res.json();
         setBreeds(data);
@@ -77,13 +78,14 @@ export default function SearchBreed() {
 
   return (
     <div>
-      <div>
+      <div data-testid="breed-outer-box">
         <form className="form">
           <div>
             <label htmlFor="query" className="label">
               Dog breed name
             </label>
             <input
+              data-testid="search-input"
               type="text"
               name="query"
               className="input"

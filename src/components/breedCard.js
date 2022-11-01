@@ -35,7 +35,7 @@ export default function BreedCard({ breed, history }) {
   };
 
   return (
-    <div className="card">
+    <div className="card" data-testid="data-card">
       <img
         className="card--image"
         src={imgSrc}
